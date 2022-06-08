@@ -41,28 +41,28 @@ public class Data {
 		}
 	}
 
-	public String carregar(String path) throws IOException {
-		String texto = Files.readString(Path.of(path), StandardCharsets.UTF_8);
-		return texto;
-	}
-
 	public static void salvar(String path, String linha) throws IOException {
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
 		buffWrite.append(linha);
 		buffWrite.close();
 	}
-	
-	public void CarregarG208N() throws IOException{
-		carregar("C:\\Users\\Unifique\\eclipse-workspace\\Interface de Alteracao de IP facilitado\\G208N - prov padrao.txt");
-	}
-	
-	public void CarregarKAP302() throws IOException{
-		carregar("C:\\\\Users\\\\Unifique\\\\eclipse-workspace\\\\Interface de Alteracao de IP facilitado\\\\KAP302 - prov padrao.txt");
+
+	public String CarregarG208N() throws IOException {
+		String texto = Files.readString(Path.of("C:\\Users\\Unifique\\eclipse-workspace\\Interface de Alteracao de IP facilitado\\G208N - prov padrao.txt"), StandardCharsets.UTF_8);
+		return texto;
 	}
 
-	public static void excessao(String aux[], String aux2, List ll) throws IOException {
+	public String CarregarKAP302() throws IOException {
+		String texto = Files.readString(Path.of("C:\\Users\\Unifique\\eclipse-workspace\\Interface de Alteracao de IP facilitado\\KAP302 - prov padrao.txt"), StandardCharsets.UTF_8);
+		return texto;
+	}
+
+	public static String remontar(String[] aux, String aux2, List ll) throws IOException {
 		for (int i = 0; i < aux.length; i++) {
-			if ((ll.get(i)).toString().substring(0, 1).equals("1") || (ll.get(i)).toString().substring(0, 1).equals("2")
+			if (i == 0) {
+				aux2 += ll.get(i) + "=";
+			} else if ((ll.get(i)).toString().substring(0, 1).equals("1")
+					|| (ll.get(i)).toString().substring(0, 1).equals("2")
 					|| (ll.get(i)).toString().substring(0, 1).equals("3")
 					|| (ll.get(i)).toString().substring(0, 1).equals("4")
 					|| (ll.get(i)).toString().substring(0, 1).equals("5")
@@ -111,17 +111,13 @@ public class Data {
 					|| (ll.get(i)).toString().equals(
 							"sip.tpa.com.br	sip.tpa.com.br	sip.tpa.com.br	sip.tpa.com.br	sip.tpa.com.br	sip.tpa.com.br	sip.tpa.com.br	sip.tpa.com.br")) {
 				aux2 += ll.get(i);
-			} else if (i == 0) {
-				aux2 += ll.get(i) + "=";
 			} else if (ll.get(i).toString().equals("fec0::1")) {
 				aux2 += "\n" + ll.get(i);
 			} else {
 				aux2 += "\n" + ll.get(i) + "=";
 			}
-
-			salvar("C:\\Users\\Unifique\\eclipse-workspace\\Interface de Alteracao de IP facilitado\\G208N - prov padrao.txt",
-					aux2);
 		}
+		return aux2;
 	}
 
 }

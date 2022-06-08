@@ -152,6 +152,7 @@ public class Tela extends JFrame {
 
 		G208N g208n = new G208N();
 		KAP302 kap302 = new KAP302();
+		String aux2 = "";
 
 		// BOTÃO PARA CONFIRMAR IP OU PREFIXO
 		JButton btnConfirm = new JButton("CONFIRMAR");
@@ -161,79 +162,120 @@ public class Tela extends JFrame {
 				String[] aux;
 				List<String> ll = new LinkedList<String>();
 
-				if (btnKAP302.isEnabled() && !btnG208N.isEnabled()) {
+				// Caso o botão KAP302 tenha sido selecionado.
+				if (btnKAP302.isEnabled() == true) {
+
+					// Atributo para leitura do arquivo .txt.
 					try {
-						data.CarregarKAP302();
+						text = data.CarregarKAP302();
 					} catch (IOException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 
+					// Atributo para pegar toda a informação de um arquivo .txt e colocá-lo em um
+					// vetor.
 					aux = text.split("[\n=]+");
+
+					// Atributo para adicionar cada palavra em uma lista.
 					for (int i = 0; i < aux.length; i++) {
 						ll.add(aux[i]);
 					}
 
-					if (comboBoxPrefix.isEnabled() == true) {
-						if (comboBoxIPS.getSelectedItem() == "ATIVACAO") {
+					// Atributo para descobrir se o a alteração será automática ou dinâmica.
+					if (comboBoxPrefix.isEnabled() == true && comboBoxIPS.isEnabled() == false) {
+						if (comboBoxPrefix.getSelectedItem() == "ATIVAÇÃO") {
 							kap302.alteradorAtivKAP302(txtIp[3], ll);
 						} else {
+							// Ainda não tem outra opção.
 						}
-					} else {
+					}
+					// Atributo para descobrir qual será a referência de IP que será alterada.
+					else {
+						// Caso a escolha seja 192.168.0.XXX.
 						if (comboBoxIPS.getSelectedItem() == "192.168.0.XXX") {
 							kap302.alteradorDinKAP302(0, txtIp, ll);
-						} else if (comboBoxIPS.getSelectedItem() == "192.168.1.XXX") {
+						}
+						// Caso a escolha seja 192.168.1.XXX.
+						else if (comboBoxIPS.getSelectedItem() == "192.168.1.XXX") {
 							kap302.alteradorDinKAP302(1, txtIp, ll);
-						} else if (comboBoxIPS.getSelectedItem() == "192.168.2.XXX") {
+						}
+						// Caso a escolha seja 192.168.2.XXX.
+						else if (comboBoxIPS.getSelectedItem() == "192.168.2.XXX") {
 							kap302.alteradorDinKAP302(2, txtIp, ll);
-						} else if (comboBoxIPS.getSelectedItem() == "192.168.3.XXX") {
+						}
+						// Caso a escolha seja 192.168.3.XXX.
+						else if (comboBoxIPS.getSelectedItem() == "192.168.3.XXX") {
 							kap302.alteradorDinKAP302(3, txtIp, ll);
-						} else if (comboBoxIPS.getSelectedItem() == "192.168.100.XXX") {
+						}
+						// Caso a escolha seja 192.168.100.XXX.
+						else if (comboBoxIPS.getSelectedItem() == "192.168.100.XXX") {
 							kap302.alteradorDinKAP302(4, txtIp, ll);
 						}
 					}
 
-					String aux2 = "";
+					// Chamada do método que exclui todas as palavras que não devem ser adicionadas.
 					try {
-						data.excessao(aux, aux2, ll);
+						data.salvar(
+								"C:\\Users\\Unifique\\eclipse-workspace\\Interface de Alteracao de IP facilitado\\KAP302 - prov padrao.txt",
+								data.remontar(aux, aux2, ll));
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				} else {
+				}
+
+				// Caso o botão G208N tenha sido selecionado.
+				else {
+
+					// Atributo para leitura do arquivo .txt.
 					try {
-						data.CarregarG208N();
+						text = data.CarregarG208N();
 					} catch (IOException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 
+					// Atributo para pegar toda a informação de um arquivo .txt e colocá-lo em um
+					// vetor.
 					aux = text.split("[\n=]+");
 					for (int i = 0; i < aux.length; i++) {
 						ll.add(aux[i]);
 					}
-
-					if (comboBoxPrefix.isEnabled() == true) {
-						if (comboBoxIPS.getSelectedItem() == "ATIVACAO") {
+					
+					// Atributo para descobrir se o a alteração será automática ou dinâmica.
+					if (comboBoxPrefix.isEnabled() == true && comboBoxIPS.isEnabled() == false) {
+						if (comboBoxPrefix.getSelectedItem() == "ATIVAÇÃO") {
 							g208n.alteradorAtivG208N(txtIp[3], ll);
+						} else {
+							// Ainda não tem outra opção.
 						}
-					} else {
+					}
+					// Atributo para descobrir qual será a referência de IP que será alterada.
+					else {
 						if (comboBoxIPS.getSelectedItem() == "192.168.0.XXX") {
+							// Caso a escolha seja 192.168.0.XXX.
 							g208n.alteradorDinG208N(0, txtIp, ll);
 						} else if (comboBoxIPS.getSelectedItem() == "192.168.1.XXX") {
+							// Caso a escolha seja 192.168.1.XXX.
 							g208n.alteradorDinG208N(1, txtIp, ll);
 						} else if (comboBoxIPS.getSelectedItem() == "192.168.2.XXX") {
+							// Caso a escolha seja 192.168.2.XXX.
 							g208n.alteradorDinG208N(2, txtIp, ll);
 						} else if (comboBoxIPS.getSelectedItem() == "192.168.3.XXX") {
+							// Caso a escolha seja 192.168.3.XXX.
 							g208n.alteradorDinG208N(3, txtIp, ll);
 						} else if (comboBoxIPS.getSelectedItem() == "192.168.100.XXX") {
+							// Caso a escolha seja 192.168.100.XXX.
 							g208n.alteradorDinG208N(4, txtIp, ll);
 						}
 					}
 
-					String aux2 = "";
 					try {
-						data.excessao(aux, aux2, ll);
+						// Chamada do método que exclui todas as palavras que não devem ser adicionadas.
+						data.salvar(
+								"C:\\Users\\Unifique\\eclipse-workspace\\Interface de Alteracao de IP facilitado\\G208N - prov padrao.txt",
+								data.remontar(aux, aux2, ll));
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -320,6 +362,7 @@ public class Tela extends JFrame {
 				txtIp[3].setEnabled(true);
 				btnPrefix.setEnabled(true);
 				btnDin.setEnabled(true);
+				btnKAP302.setEnabled(false);
 			}
 		});
 		btnG208N.setBackground(new Color(154, 205, 50));
@@ -337,6 +380,7 @@ public class Tela extends JFrame {
 				txtIp[3].setEnabled(true);
 				btnPrefix.setEnabled(true);
 				btnDin.setEnabled(true);
+				btnG208N.setEnabled(false);
 			}
 		});
 		btnKAP302.setBackground(new Color(154, 205, 50));
