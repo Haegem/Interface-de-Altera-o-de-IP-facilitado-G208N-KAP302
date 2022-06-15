@@ -9,6 +9,45 @@ public class G208N {
 		ll.set(1538, "192.168.3." + txtIp.getText());
 	}
 
+	public void alteradorFreeG208N(JTextField txtIp, List ll) {
+		/*switch (comboBoxDin.getSelectedIndex()) {
+		case 0:
+
+		case 1:
+
+		case 2:
+
+		case 3:
+
+		case 4:
+
+		case 5:
+
+		case 6:
+
+		case 7:
+
+		case 8:
+
+		case 9:
+
+		case 10:
+
+		case 11:
+
+		case 12:
+
+		case 13:
+
+		case 14:
+
+		case 15:
+
+		}
+	}*/
+
+	}
+
 	public void alteradorDinG208N(int contador, JTextField[] txtIp, List ll) {
 		switch (contador) {
 		case 0:

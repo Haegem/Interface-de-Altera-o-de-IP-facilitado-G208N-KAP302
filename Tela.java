@@ -63,6 +63,7 @@ public class Tela extends JFrame {
 
 		JButton btnG208N = new JButton("G208N");
 		JButton btnKAP302 = new JButton("KAP302");
+		JButton btnConfirmDin = new JButton("CONFIRMAR");
 
 		// OPÇÕES Prefixos
 		JComboBox comboBoxPrefix = new JComboBox();
@@ -79,6 +80,10 @@ public class Tela extends JFrame {
 		// Desabilitar o botão dificuldade
 		LabelSelectPrefix.setEnabled(false);
 
+		
+		
+		
+		
 		// OPÇÕES IP's
 		JComboBox comboBoxIPS = new JComboBox();
 		comboBoxIPS.setBounds(5, 104, 150, 31);
@@ -95,6 +100,32 @@ public class Tela extends JFrame {
 		// Desabilitar o botão dificuldade
 		LabelSelectIPS.setEnabled(false);
 
+		
+		
+		
+		
+		// OPÇÕES DINÂMICAS
+		JComboBox comboBoxDin = new JComboBox();
+		comboBoxDin.setBounds(255, 104, 150, 31);
+		comboBoxDin.setModel(new DefaultComboBoxModel(new String[] { "lan_default_dhcpEnd", "lan_default_dhcpStart",
+				"dhcpPriDns", "wireless_wan_ipaddr", "DBID_LOCAL_IP", "SecondNTPServerIP", "mwan_gateway", "lan_ipaddr",
+				"mwan_ipaddr", "DBID_UPGRADE_FTP_SERVER", "mwan_primary_dns", "dhcpGateway", "wireless_wan_gateway",
+				"lan_default_ipaddr", "dhcpStart", "dhcpEnd" }));
+		comboBoxDin.setFont(new Font("Txt_IV50", Font.BOLD, 15));
+		comboBoxDin.setToolTipText("DIN");
+
+		JLabel LabelSelectDin = new JLabel();
+		LabelSelectDin.setFont(new Font("Txt_IV50", Font.PLAIN, 11));
+		LabelSelectDin.setToolTipText("SELECTDIN");
+		LabelSelectDin.setBounds(255, 79, 172, 14);
+		contentPane.add(comboBoxDin);
+		// Desabilitar o botão dificuldade
+		LabelSelectDin.setEnabled(false);
+
+		
+		
+		
+		
 		// TÍTULO PARA DIGITAR IP
 		JLabel lblTitleIp = new JLabel("Digite o IP:");
 		lblTitleIp.setHorizontalAlignment(SwingConstants.CENTER);
@@ -191,7 +222,7 @@ public class Tela extends JFrame {
 						}
 					}
 					// Atributo para descobrir qual será a referência de IP que será alterada.
-					else {
+					else if (comboBoxIPS.isEnabled() == true && comboBoxPrefix.isEnabled() == false) {
 						// Caso a escolha seja 192.168.0.XXX.
 						if (comboBoxIPS.getSelectedItem() == "192.168.0.XXX") {
 							kap302.alteradorDinKAP302(0, txtIp, ll);
@@ -211,6 +242,42 @@ public class Tela extends JFrame {
 						// Caso a escolha seja 192.168.100.XXX.
 						else if (comboBoxIPS.getSelectedItem() == "192.168.100.XXX") {
 							kap302.alteradorDinKAP302(4, txtIp, ll);
+						}
+					} else {
+						
+						switch(comboBoxDin.getSelectedIndex()) {
+						case 0:
+							
+						case 1:
+
+						case 2:
+
+						case 3:
+
+						case 4:
+
+						case 5:
+
+						case 6:
+
+						case 7:
+
+						case 8:
+
+						case 9:
+
+						case 10:
+
+						case 11:
+
+						case 12:
+
+						case 13:
+
+						case 14:
+
+						case 15:
+							
 						}
 					}
 
@@ -242,7 +309,7 @@ public class Tela extends JFrame {
 					for (int i = 0; i < aux.length; i++) {
 						ll.add(aux[i]);
 					}
-					
+
 					// Atributo para descobrir se o a alteração será automática ou dinâmica.
 					if (comboBoxPrefix.isEnabled() == true && comboBoxIPS.isEnabled() == false) {
 						if (comboBoxPrefix.getSelectedItem() == "ATIVAÇÃO") {
@@ -252,7 +319,7 @@ public class Tela extends JFrame {
 						}
 					}
 					// Atributo para descobrir qual será a referência de IP que será alterada.
-					else {
+					else if(comboBoxIPS.isEnabled() == true && comboBoxPrefix.isEnabled() == false) {
 						if (comboBoxIPS.getSelectedItem() == "192.168.0.XXX") {
 							// Caso a escolha seja 192.168.0.XXX.
 							g208n.alteradorDinG208N(0, txtIp, ll);
@@ -269,7 +336,9 @@ public class Tela extends JFrame {
 							// Caso a escolha seja 192.168.100.XXX.
 							g208n.alteradorDinG208N(4, txtIp, ll);
 						}
-					}
+					} else {
+						
+						
 
 					try {
 						// Chamada do método que exclui todas as palavras que não devem ser adicionadas.
@@ -325,12 +394,14 @@ public class Tela extends JFrame {
 		contentPane.add(btnConfirmIP);
 
 		JButton btnPrefix = new JButton(" ");
+		JButton btnPreDin = new JButton(" ");
 		JButton btnDin = new JButton(" ");
 
 		// BOTÃO HABILITAR BOTÃO PREFIXO
 		btnPrefix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBoxIPS.setEnabled(false);
+				comboBoxDin.setEnabled(false);
 				comboBoxPrefix.setEnabled(true);
 			}
 		});
@@ -340,18 +411,33 @@ public class Tela extends JFrame {
 		btnPrefix.setBounds(160, 55, 25, 25);
 		contentPane.add(btnPrefix);
 
-		// BOTÃO HABILITAR BOTÃO DINÂNIMCO
+		// BOTÃO HABILITAR BOTÃO DINAMICO
 		btnDin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				comboBoxIPS.setEnabled(true);
+				comboBoxIPS.setEnabled(false);
+				comboBoxDin.setEnabled(true);
 				comboBoxPrefix.setEnabled(false);
 			}
 		});
 		btnDin.setBackground(new Color(154, 205, 50));
 		btnDin.setFont(new Font("Txt_IV50", Font.BOLD, 11));
 		btnDin.setToolTipText(" ");
-		btnDin.setBounds(160, 105, 25, 25);
+		btnDin.setBounds(410, 105, 25, 25);
 		contentPane.add(btnDin);
+
+		// BOTÃO HABILITAR BOTÃO PREFIXO DINAMICO
+		btnPreDin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBoxIPS.setEnabled(true);
+				comboBoxDin.setEnabled(false);
+				comboBoxPrefix.setEnabled(false);
+			}
+		});
+		btnPreDin.setBackground(new Color(154, 205, 50));
+		btnPreDin.setFont(new Font("Txt_IV50", Font.BOLD, 11));
+		btnPreDin.setToolTipText(" ");
+		btnPreDin.setBounds(160, 105, 25, 25);
+		contentPane.add(btnPreDin);
 
 		// BOTÃO G208N
 		btnG208N.addActionListener(new ActionListener() {
@@ -360,8 +446,9 @@ public class Tela extends JFrame {
 				comboBoxPrefix.setEnabled(true);
 				btnDin.setEnabled(true);
 				txtIp[3].setEnabled(true);
-				btnPrefix.setEnabled(true);
 				btnDin.setEnabled(true);
+				btnPreDin.setEnabled(true);
+				btnPrefix.setEnabled(true);
 				btnKAP302.setEnabled(false);
 			}
 		});
@@ -378,8 +465,9 @@ public class Tela extends JFrame {
 				comboBoxPrefix.setEnabled(true);
 				btnDin.setEnabled(true);
 				txtIp[3].setEnabled(true);
-				btnPrefix.setEnabled(true);
 				btnDin.setEnabled(true);
+				btnPreDin.setEnabled(true);
+				btnPrefix.setEnabled(true);
 				btnG208N.setEnabled(false);
 			}
 		});
@@ -393,7 +481,9 @@ public class Tela extends JFrame {
 		btnConfirmIP.setEnabled(false);
 		comboBoxPrefix.setEnabled(false);
 		comboBoxIPS.setEnabled(false);
+		comboBoxDin.setEnabled(false);
 		btnPrefix.setEnabled(false);
+		btnPreDin.setEnabled(false);
 		btnDin.setEnabled(false);
 
 	}
